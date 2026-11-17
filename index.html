@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>InstantVerify | Dental Insurance Verification, Done Before You Open</title>
 <meta name="description" content="InstantVerify checks every scheduled patient's dental benefits before your office opens, on your own computer. Talk with Dr. J or book a short call.">
+<!-- Google Analytics 4 (same property as instantverifyai.com; compare by hostname) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3WTRZST0WC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3WTRZST0WC', { linker: { domains: ['instantverifyai.com', 'getinstantverify.com'] } });
+  // Team devices: open any page with ?team=1 once per browser to mark your visits as internal (?team=0 undoes it)
+  (function () {
+    try {
+      var q = new URLSearchParams(location.search).get('team');
+      if (q === '1') localStorage.setItem('iv_team', '1');
+      if (q === '0') localStorage.removeItem('iv_team');
+      if (localStorage.getItem('iv_team') === '1') gtag('set', { traffic_type: 'internal' });
+    } catch (e) {}
+  })();
+</script>
 <link rel="canonical" href="https://instantverifyai.com/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
@@ -48,8 +65,8 @@
   <h1>Every patient checked before you unlock the door.</h1>
   <p>InstantVerify checks the benefits for each patient on the schedule before your office opens, carrier by carrier, and has a clear report waiting for your front desk. It runs on your office's own computer, so patient information stays with you.</p>
   <div class="btns">
-    <a class="btn btn-primary" href="https://calendly.com/drbrianj">Book a short call</a>
-    <a class="btn btn-ghost" href="https://instantverifyai.com/sample-report/">See a real report</a>
+    <a class="btn btn-primary" href="https://calendly.com/drbrianj" data-cta="hero_book_call">Book a short call</a>
+    <a class="btn btn-ghost" href="https://instantverifyai.com/sample-report/" data-cta="hero_sample_report">See a real report</a>
   </div>
 </div></div>
 
@@ -64,13 +81,19 @@
 
 <section class="cta"><div class="wrap">
   <h2>Talk with Dr. J</h2>
-  <p>Dr. Brian Johnston will walk you through how it would work in your office. Call <a class="call" href="tel:+13852440314">(385) 244-0314</a>, or pick a time that suits you.</p>
-  <a class="btn btn-primary" href="https://calendly.com/drbrianj">Book on Dr. J's calendar</a>
-  <div class="more"><a href="https://instantverifyai.com/">Pricing, sample reports and more at instantverifyai.com →</a></div>
+  <p>Dr. Brian Johnston will walk you through how it would work in your office. Call <a class="call" href="tel:+13852440314" data-cta="call_dr_j">(385) 244-0314</a>, or pick a time that suits you.</p>
+  <a class="btn btn-primary" href="https://calendly.com/drbrianj" data-cta="book_dr_j">Book on Dr. J's calendar</a>
+  <div class="more"><a href="https://instantverifyai.com/" data-cta="main_site">Pricing, sample reports and more at instantverifyai.com →</a></div>
 </div></section>
 
 <footer><div class="wrap">
   &copy; 2026 Instant Verify AI, Inc. · <a href="https://instantverifyai.com/privacy-policy/">Privacy Policy</a> · <a href="https://instantverifyai.com/terms-of-service/">Terms of Service</a> · <a href="mailto:support@instantverifyai.com">support@instantverifyai.com</a>
 </div></footer>
+<script>
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-cta]');
+    if (a && typeof gtag === 'function') gtag('event', 'cta_click', { cta_id: a.dataset.cta, link_url: a.getAttribute('href') });
+  });
+</script>
 </body>
 </html>
